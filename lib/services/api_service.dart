@@ -80,4 +80,16 @@ class ApiService {
 
     throw Exception('Failed to submit answer');
   }
+
+  static Future<List<dynamic>> getLeaderboard(int sessionId) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/participant/leaderboard/$sessionId'),
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    }
+
+    throw Exception('Failed to load leaderboard');
+  }
 }
